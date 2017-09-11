@@ -6,7 +6,7 @@ import java.nio.IntBuffer;
 import javax.microedition.khronos.opengles.GL10;
 /**
  * A vertex shaded cube.
- * 3차원 공간에 렌더링될 큐브물체의 좌표값등을 정의하고 있습니다.
+ * 3次元空間レンダリングするキューブ物体の座標値を定義する。
  */
 class Cube
 {

@@ -7,9 +7,7 @@ import android.view.MotionEvent;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-/**
- * Created by whitesky on 2017-09-12.
- */
+
 
 class TouchSurfaceView extends GLSurfaceView {
     public TouchSurfaceView(Context context) {
@@ -21,27 +19,27 @@ class TouchSurfaceView extends GLSurfaceView {
     /*
     * (non-Javadoc)
     * @see android.view.View#onTouchEvent(android.view.MotionEvent)
-    * 터치 이벤트 발생시 처리
-    * 터치 드래그량에 따른 회전각도 계산하여 렌더링합니다.
+    * タッチイベント発生し処理
+    * タッチ加減による回転角度を計算しレンダリングを行う。
     */
-    @Override public boolean onTouchEvent(MotionEvent e) {
-        float x = e.getX();
-        float y = e.getY();
-        switch (e.getAction()) {
-            case MotionEvent.ACTION_MOVE:
-                float dx = x - mPreviousX;
-                float dy = y - mPreviousY;
-                mRenderer.mAngleX += dx * TOUCH_SCALE_FACTOR;
-                mRenderer.mAngleY += dy * TOUCH_SCALE_FACTOR;
-                requestRender();
-        }
-        mPreviousX = x;
-        mPreviousY = y;
-        return true;
-    }
+//    @Override public boolean onTouchEvent(MotionEvent e) {
+//        float x = e.getX();
+//        float y = e.getY();
+//        switch (e.getAction()) {
+//            case MotionEvent.ACTION_MOVE:
+//                float dx = x - mPreviousX;
+//                float dy = y - mPreviousY;
+//                mRenderer.mAngleX += dx * TOUCH_SCALE_FACTOR;
+//                mRenderer.mAngleY += dy * TOUCH_SCALE_FACTOR;
+//                requestRender();
+//        }
+//        mPreviousX = x;
+//        mPreviousY = y;
+//        return true;
+//    }
     /**
      * Render a cube.
-     * 3차원 화면에 렌더링처리 내용을 정의합니다.
+     * 3次元画面にレンダリング処理の内容を定義する。
      */
     private class CubeRenderer implements GLSurfaceView.Renderer {
         public CubeRenderer() {
@@ -50,7 +48,7 @@ class TouchSurfaceView extends GLSurfaceView {
         /*
          * (non-Javadoc)
          * @see android.opengl.GLSurfaceView.Renderer#onDrawFrame(javax.microedition.khronos.opengles.GL10)
-         * 시스템에서 렌더링 처리시 호출하는 메소드입니다.
+         * システムでレンダリング処理が行うとき呼び出すメソッド
          */
         public void onDrawFrame(GL10 gl) {
             /*
@@ -61,13 +59,13 @@ class TouchSurfaceView extends GLSurfaceView {
             gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
             /*
              * Now we're ready to draw some 3D objects
-             * 회전하면서 큐브를 렌더링 합니다.
+             *回転しながらキューブをレンダリングする。
              */
             gl.glMatrixMode(GL10.GL_MODELVIEW);
             gl.glLoadIdentity();
             gl.glTranslatef(0, 0, -3.0f);
-            gl.glRotatef(mAngleX, 0, 1, 0);
-            gl.glRotatef(mAngleY, 1, 0, 0);
+            gl.glRotatef(30f, 1, 1, 0);
+//            gl.glRotatef(mAngleY, 1, 0, 0);
             gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
             gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
             mCube.draw(gl);
@@ -87,7 +85,7 @@ class TouchSurfaceView extends GLSurfaceView {
         /*
          * (non-Javadoc)
          * @see android.opengl.GLSurfaceView.Renderer#onSurfaceCreated(javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.egl.EGLConfig)
-         * 3차원 공간 생성시 초기화 처리
+         * 3次元空間生成し初期化処理
          */
         public void onSurfaceCreated(GL10 gl, EGLConfig config) {
             /*
